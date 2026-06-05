@@ -11,9 +11,17 @@ function appendMessage(text, sender) {
     textBubble.classList.add("text-bubble"); // Add a class for styling the text bubble
     textBubble.textContent = text; // Set the text content of the bubble to the message
 
+    if (sender === "bot") {
+        const botIcon = document.createElement("img"); // Create an img element for the bot icon
+        botIcon.src = "logo.png"; // Set the source of the bot icon
+        botIcon.alt = "RavinTech Bot Icon"; // Set the alt text for the bot icon
+        botIcon.classList.add("bot-icon"); // Add a class for styling the bot icon
+        messageElement.appendChild(botIcon); // Append the bot icon to the message element
+    }
+
     messageElement.appendChild(textBubble); // Append the text bubble to the message element
     chatbox.appendChild(messageElement); // Append the message element to the chat container
-    chatContainer.scrollTop = chatbox.scrollHeight; // Scroll to the bottom of the chat container
+    chatbox.scrollTop = chatbox.scrollHeight; // Scroll to the bottom of the chat container
 }
 
 // Create send message function
@@ -21,7 +29,6 @@ async function sendMessage() {
     const message = inputMessage.value.trim(); // Get the message from the input field and trim whitespace
     
     if (!message) return; // If the message is empty, do nothing
-
     appendMessage(message, "user"); // Append the user's message to the chat
     inputMessage.value = ''; // Clear the input field
     sendButton.disabled = true; // Disable the send button while waiting for a response
