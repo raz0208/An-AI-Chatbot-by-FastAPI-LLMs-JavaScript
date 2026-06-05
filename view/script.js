@@ -12,8 +12,8 @@ function appendMessage(text, sender) {
     textBubble.textContent = text; // Set the text content of the bubble to the message
 
     messageElement.appendChild(textBubble); // Append the text bubble to the message element
-    chatContainer.appendChild(messageElement); // Append the message element to the chat container
-    chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom of the chat container
+    chatbox.appendChild(messageElement); // Append the message element to the chat container
+    chatContainer.scrollTop = chatbox.scrollHeight; // Scroll to the bottom of the chat container
 }
 
 // Create send message function
