@@ -1,6 +1,6 @@
 const inputMessage = document.getElementById("inputMessage"); // Get the input field for the message
-const sendButton = document.getElementById("sendButton"); // Get the send button
-const chatContainer = document.getElementById("chatContainer"); // Get the container where chat messages will be displayed
+const sendButton = document.getElementById("sendBtn"); // Get the send button
+const chatbox = document.getElementById("chatbox"); // Get the container where chat messages will be displayed
 
 // Function to create a chat message element
 function appendMessage(text, sender) {
@@ -15,3 +15,26 @@ function appendMessage(text, sender) {
     chatContainer.appendChild(messageElement); // Append the message element to the chat container
     chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom of the chat container
 }
+
+// Create send message function
+async function sendMessage() {
+    const message = inputMessage.value.trim(); // Get the message from the input field and trim whitespace
+    
+    if (!message) return; // If the message is empty, do nothing
+
+    appendMessage(message, "user"); // Append the user's message to the chat
+    inputMessage.value = ''; // Clear the input field
+    sendButton.disabled = true; // Disable the send button while waiting for a response
+
+}
+
+// Event listener for the send button
+sendButton.addEventListener("click", sendMessage);
+
+// Event listener for pressing Enter key in the input field
+inputMessage.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent the default action of the Enter key
+        sendMessage(); // Call the sendMessage function
+    }
+})
