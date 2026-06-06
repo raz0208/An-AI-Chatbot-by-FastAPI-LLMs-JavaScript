@@ -50,5 +50,5 @@ async def get_response_from_bot(message: str) -> str:
 # 3) the function will return a response with the same message
 @app.post("/chat")
 async def chat(request: chatRequest):
-    response_message = get_response_from_bot(request.message) # Pass the message to the bot function and get the response
+    response_message = await get_response_from_bot(request.message) # Pass the message to the bot function and get the response
     return {"message": response_message} # Return the response as a JSON object
