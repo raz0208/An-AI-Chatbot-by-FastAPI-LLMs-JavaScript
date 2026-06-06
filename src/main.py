@@ -9,7 +9,7 @@ load_dotenv() # Load the environment variables from the .env file
 
 # Initialize the Groq client with the API key from the environment variable
 client = Groq(
-        api_key = os.environ.get("GQOQ_API_KEY")
+        api_key = os.environ.get("GROQ_API_KEY")
     )
 
 # Define the data model for the request body of the chat endpoint
