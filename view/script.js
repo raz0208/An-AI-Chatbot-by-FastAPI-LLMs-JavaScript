@@ -13,6 +13,9 @@ function appendMessage(text, sender) {
 
     if (sender === "bot") {
         const botIcon = document.createElement("img"); // Create an img element for the bot icon
+        botIcon.style.width = "30px"; // Set the width of the bot icon
+        botIcon.style.height = "30px"; // Set the height of the bot icon
+        botIcon.style.paddingRight = "10px"; // Add some margin to the right of the bot icon
         botIcon.src = "logo.png"; // Set the source of the bot icon
         botIcon.alt = "RavinTech Bot Icon"; // Set the alt text for the bot icon
         botIcon.classList.add("bot-icon"); // Add a class for styling the bot icon

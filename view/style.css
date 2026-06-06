@@ -37,14 +37,12 @@ body {
 }
 /* Styling for the logo in the chat header */
 .bot-header-logo {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%; /* Optional: to make the logo circular */
+    width: 30px;
+    height: 30px;
 }
 .message.bot .bot-chat-logo {
     width: 28px;
     height: 28px;
-    border-radius: 50%; /* Optional: to make the logo circular */
     align-self: flex-end;
     flex-shrink: 0;
     margin-right: 8px;
@@ -62,7 +60,7 @@ body {
 
 .bot-info h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 
