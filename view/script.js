@@ -33,6 +33,31 @@ async function sendMessage() {
     inputMessage.value = ''; // Clear the input field
     sendButton.disabled = true; // Disable the send button while waiting for a response
 
+
+    // Use try-catch block to handle errors when sending the message and receiving a response 
+    try {
+        const response = await fetch("http://127.0.0.1:8000/chat", { // Send a POST request to the /chat endpoint
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json" // Set the content type to JSON
+            },
+            body: JSON.stringify({ message }) // Send the message as a JSON object in the request body
+        });
+
+        if (!response.ok) { // If the response is not OK, throw an error
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json(); // Parse the response as JSON
+        appendMessage(data.message, "bot"); // Append the bot's response to the chat
+    } catch (error) {
+        console.error("Error sending message:", error); // Log any errors to the console
+        appendMessage("Sorry, something went wrong. Please try again.", "bot"); // Append an error message to the chat
+    } finally {
+        sendButton.disabled = false; // Re-enable the send button after the response is received or an error occurs
+        inputMessage.focus(); // Focus the input field for the next message
+    }
+
 }
 
 // Event listener for the send button
