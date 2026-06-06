@@ -1,20 +1,38 @@
 from fastapi import FastAPI
 from pydantic import BaseModel # Use to check the data type of the input
+from groq import Groq # Import the Groq library to interact with the LLMs
+from dotenv import load_dotenv # Load environment variables from a .env file
+import os
 
-class chatRequest(BaseModel): # Define the data model for the request body
+load_dotenv() # Load the environment variables from the .env file
+
+# Initialize the Groq client with the API key from the environment variable
+client = Groq(
+        api_key = os.environ.get("GQOQ_API_KEY")
+    )
+
+# Define the data model for the request body of the chat endpoint
+class chatRequest(BaseModel): 
     message: str
 
-app = FastAPI() # Initialize the FastAPI app
+# Initialize the FastAPI app
+app = FastAPI()
 
 # Function to get a response from the bot based on the input message
 def get_response_from_bot(message: str) -> str:
-    # For simplicity, we will just return a fixed response based on the input message
-    if "hello" in message.lower():
-        return "Hello! How can I help you today?"
-    elif "how are you" in message.lower():
-        return "I'm a bot, so I don't have feelings, but I'm here to help you!"
-    else:
-        return "Sorry, I didn't understand that. Can you please rephrase?"
+    # Use the Groq client to create a response based on the input message and the specified model
+    response = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": message,
+            }
+        ],
+        model="llama-3.3-70b-versatile",
+        stream=False,
+    )
+    # Return the content of the response message
+    return response.choices[0].message.content 
 
 # Define the endpoint for the chat API: 
 # 1) it will receive a POST request,
